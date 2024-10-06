@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import { Button } from "./shared/ui";
+import { Modal } from "shared/ui";
 
 const App: React.FC = () => {
     return (
         <div>
-            <Button>Следующий</Button>
+            <Modal />
         </div>
     );
 };
