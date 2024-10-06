@@ -1,12 +1,16 @@
 import React from "react";
-import "./App.css";
-import { Modal } from "shared/ui";
+import { MuiStylesProvider } from "./providers/MuiStylesProvider";
+import { Modal } from "../shared/ui";
+import "./styles/global.css";
+import "../shared/fonts/VAG-World/VAG-World.css";
 
 const App: React.FC = () => {
     return (
-        <div>
-            <Modal />
-        </div>
+        <MuiStylesProvider>
+            <div>
+                <Modal />
+            </div>
+        </MuiStylesProvider>
     );
 };
 
