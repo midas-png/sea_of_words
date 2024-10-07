@@ -20,6 +20,12 @@ export default defineConfig({
                 ),
             },
             {
+                find: "widgets",
+                replacement: fileURLToPath(
+                    new URL("./src/widgets", import.meta.url)
+                ),
+            },
+            {
                 find: "shared",
                 replacement: fileURLToPath(
                     new URL("./src/shared", import.meta.url)
