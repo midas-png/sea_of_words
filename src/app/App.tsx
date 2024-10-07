@@ -1,23 +1,13 @@
 import { FC } from "react";
 import { MuiStylesProvider } from "./providers/MuiStylesProvider";
-import { Modal } from "../shared/ui";
-import { useIsMultipleTabs } from "../shared/lib";
+import { HomePage } from "../pages/home";
 import "./styles/global.css";
 import "../shared/fonts/VAG-World/VAG-World.css";
 
-const App: FC = () => {
-    const isMultipleTabs = useIsMultipleTabs();
-
-    return (
-        <MuiStylesProvider>
-            <Modal
-                open={isMultipleTabs}
-                title={undefined}
-                content={undefined}
-                buttonText={"вывы"}
-            />
-        </MuiStylesProvider>
-    );
-};
+const App: FC = () => (
+    <MuiStylesProvider>
+        <HomePage />
+    </MuiStylesProvider>
+);
 
 export default App;
