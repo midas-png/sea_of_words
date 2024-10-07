@@ -1,0 +1,1 @@
+export { useIsMultipleTabs } from "./useIsMultipleTabs";
