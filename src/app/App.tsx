@@ -7,9 +7,12 @@ import "../shared/fonts/VAG-World/VAG-World.css";
 const App: React.FC = () => {
     return (
         <MuiStylesProvider>
-            <div>
-                <Modal />
-            </div>
+            <Modal
+                open={false}
+                title={undefined}
+                content={undefined}
+                buttonText={""}
+            />
         </MuiStylesProvider>
     );
 };
