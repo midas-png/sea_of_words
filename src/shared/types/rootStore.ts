@@ -33,3 +33,5 @@ export type RootState = ReturnType<
         }>
     >
 >;
+
+export type AppDispatch = RootStore["dispatch"];
