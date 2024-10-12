@@ -5,13 +5,18 @@ import { LetterBlock } from "shared/ui/LetterBlock";
 
 interface ILetterBlock {
     word: TLetter[];
+    isGuessed: boolean;
 }
 
-export const WordBlock: FC<ILetterBlock> = ({ word }: ILetterBlock) => {
+export const WordBlock: FC<ILetterBlock> = ({ word, isGuessed }: ILetterBlock) => {
     return (
-        <Stack flexDirection="row" gap='6px'>
+        <Stack flexDirection="row" gap="6px">
             {word.map((letter) => (
-                <LetterBlock key={Math.random() + letter} letter={letter} />
+                <LetterBlock
+                    key={Math.random() + letter}
+                    letter={letter}
+                    isGuessed={isGuessed}
+                />
             ))}
         </Stack>
     );

@@ -5,20 +5,28 @@ import { TLetter } from "shared/types";
 
 interface ILetterBlock {
     letter: TLetter;
+    isGuessed: boolean;
 }
 
-export const LetterBlock: FC<ILetterBlock> = ({ letter }: ILetterBlock) => {
+export const LetterBlock: FC<ILetterBlock> = ({
+    letter,
+    isGuessed,
+}: ILetterBlock) => {
     return (
         <Box
             display="flex"
             justifyContent="center"
             alignItems="center"
-            bgcolor="#F2F2F2"
+            bgcolor={isGuessed ? "#65BD65" : "#F2F2F2"}
             height={72}
             width={72}
             borderRadius="16px"
         >
-            <Typography fontSize={42}>{letter}</Typography>
+            {isGuessed && (
+                <Typography fontSize={42} color="#fff">
+                    {letter.toUpperCase()}
+                </Typography>
+            )}
         </Box>
     );
 };

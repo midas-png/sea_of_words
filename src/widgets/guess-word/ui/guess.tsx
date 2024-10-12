@@ -18,6 +18,7 @@ export const GuessWord = () => {
                     <WordBlock
                         key={Math.random() + word}
                         word={word.split("") as TLetter[]}
+                        isGuessed
                     />
                 ))}
             </Stack>
