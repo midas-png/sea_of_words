@@ -6,6 +6,7 @@ import { Button } from "shared/ui";
 import { levelSlice } from "entities/level/model/levelSlice";
 import { useCallback } from "react";
 import { selectBase } from "entities/level";
+import { screenSlice } from "entities/screen";
 
 export const VictoryScreen = () => {
     const levelStore = useAppSelector(selectBase);
@@ -13,6 +14,7 @@ export const VictoryScreen = () => {
 
     const handleNextLevel = useCallback(() => {
         dispatch(levelSlice.actions.getNextLevel());
+        dispatch(screenSlice.actions.setScreen("guess"));
     }, []);
 
     return (
@@ -20,7 +22,7 @@ export const VictoryScreen = () => {
             justifyContent="space-between"
             alignItems="center"
             py={6}
-            height={1}
+            height='100vh'
         >
             <Stack gap="15px">
                 <Typography color="#fff" fontSize={37} lineHeight="91.9%">

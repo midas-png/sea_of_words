@@ -1,9 +1,18 @@
-import { EnhancedStore, UnknownAction, Tuple, StoreEnhancer, ThunkDispatch, Reducer } from "@reduxjs/toolkit";
+import {
+    EnhancedStore,
+    UnknownAction,
+    Tuple,
+    StoreEnhancer,
+    ThunkDispatch,
+    Reducer,
+} from "@reduxjs/toolkit";
 import { ILevelState } from "./levelTypes";
+import { IScreenState } from "./screenTypes";
 
 export type RootStore = EnhancedStore<
     {
         level: ILevelState;
+        screen: IScreenState;
     },
     UnknownAction,
     Tuple<
@@ -12,6 +21,7 @@ export type RootStore = EnhancedStore<
                 dispatch: ThunkDispatch<
                     {
                         level: ILevelState;
+                        screen: IScreenState;
                     },
                     undefined,
                     UnknownAction
@@ -26,10 +36,12 @@ export type RootState = ReturnType<
     Reducer<
         {
             level: ILevelState;
+            screen: IScreenState;
         },
         UnknownAction,
         Partial<{
             level: ILevelState | undefined;
+            screen: IScreenState | undefined;
         }>
     >
 >;

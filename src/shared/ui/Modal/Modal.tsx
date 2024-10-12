@@ -67,7 +67,7 @@ export const Modal: FC<ModalProps> = ({
                 <DialogContent
                     sx={{ textAlign: "center", mt: "53px", pb: 0.5 }}
                 >
-                    <Typography variant="body2" fontSize={30}>
+                    <Typography variant="body2" color="#4D4D4D" fontSize={30}>
                         {content}
                     </Typography>
                 </DialogContent>

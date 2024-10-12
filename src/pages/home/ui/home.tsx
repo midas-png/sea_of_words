@@ -1,21 +1,23 @@
 import { FC } from "react";
 import { Modal } from "shared/ui";
-import { useIsMultipleTabs } from "shared/lib";
-// import { VictoryScreen } from "widgets/victory-screen";
+import { useAppSelector, useIsMultipleTabs } from "shared/lib";
+import { VictoryScreen } from "widgets/victory-screen";
 import { GuessWord } from "widgets";
+import { typeSelector } from "entities/screen";
 
 export const HomePage: FC = () => {
+    const screenStoreType = useAppSelector(typeSelector);
     const isMultipleTabs = useIsMultipleTabs();
 
     return (
         <>
-            <GuessWord />
-            {/* <VictoryScreen /> */}
+            {screenStoreType === "guess" ? <GuessWord /> : <VictoryScreen />}
             <Modal
                 open={isMultipleTabs}
-                title={undefined}
-                content={undefined}
-                buttonText={"вывы"}
+                title="Две вкладки с игрой?"
+                content="Похоже, игра открыта в нескольких вкладках браузера. Чтобы продолжить играть в этой вкладке, обновите страницу."
+                buttonText={"Обновить"}
+                onAccept={() => window.location.reload()}
             />
         </>
     );

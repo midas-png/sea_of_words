@@ -1,19 +1,20 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useAppDispatch, useAppSelector } from "shared/lib";
-import { levelSlice, selectBase } from "entities/level";
+import { selectBase } from "entities/level";
 import { WordBlock } from "features/word-block";
 import { TLetter } from "shared/types";
 import Box from "@mui/material/Box";
 import { Button } from "shared/ui";
 import { useCallback } from "react";
+import { screenSlice } from "entities/screen";
 
 export const GuessWord = () => {
     const levelStore = useAppSelector(selectBase);
     const dispatch = useAppDispatch();
 
     const handleNextLevel = useCallback(() => {
-        dispatch(levelSlice.actions.getNextLevel());
+        dispatch(screenSlice.actions.setScreen("next"));
     }, []);
 
     return (
