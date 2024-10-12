@@ -22,14 +22,17 @@ export const GuessWord = () => {
             <Typography color="#fff" fontSize={30} lineHeight="35px">
                 Уровень {levelStore.levelNumber}
             </Typography>
-            <Stack alignItems="center" gap="6px">
-                {levelStore.level?.words.map((word) => (
-                    <WordBlock
-                        key={Math.random() + word}
-                        word={word.split("") as TLetter[]}
-                        isGuessed
-                    />
-                ))}
+            <Stack alignItems="center" gap="19px">
+                <Stack alignItems="center" gap="6px">
+                    {levelStore.level?.words.map((word) => (
+                        <WordBlock
+                            key={Math.random() + word}
+                            word={word.split("") as TLetter[]}
+                            isGuessed
+                        />
+                    ))}
+                </Stack>
+                <WordBlock word={["р", "о", "в"]} isSmalled isGuessed={false} />
             </Stack>
             <Box>
                 <Button
