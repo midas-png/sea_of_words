@@ -11,7 +11,6 @@ const App: FC = () => (
             <Box
                 display="flex"
                 justifyContent="center"
-                height="100vh"
                 bgcolor="#202432"
             >
                 <Box width={640} bgcolor="#2B344B" height={1}>

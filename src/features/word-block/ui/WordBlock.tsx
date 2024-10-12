@@ -9,9 +9,9 @@ interface ILetterBlock {
 
 export const WordBlock: FC<ILetterBlock> = ({ word }: ILetterBlock) => {
     return (
-        <Stack flexDirection="row" gap={1}>
+        <Stack flexDirection="row" gap='6px'>
             {word.map((letter) => (
-                <LetterBlock letter={letter} />
+                <LetterBlock key={Math.random() + letter} letter={letter} />
             ))}
         </Stack>
     );
