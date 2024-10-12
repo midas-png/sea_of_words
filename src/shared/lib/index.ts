@@ -1,1 +1,3 @@
 export { useIsMultipleTabs } from "./useIsMultipleTabs";
+export { useAppDispatch } from "./useAppDispatch";
+export { useAppSelector } from "./useAppSelector";

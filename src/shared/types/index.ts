@@ -1,3 +1,8 @@
 export { type ErrorType, type RejectedDataType } from "./errorTypes";
-export { type ILevel } from "./levelTypes";
+export {
+    type ILevel,
+    type ILevelObject,
+    type ILevelState,
+    type TAvaliableLevels,
+} from "./levelTypes";
 export { type RootState, type AppDispatch } from "./rootStore";

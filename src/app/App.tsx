@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { MuiStylesProvider, ReduxProvider } from "./providers";
 import { HomePage } from "../pages/home";
-import "./styles/global.css";
-import "../shared/fonts/VAG-World/VAG-World.css";
 import Box from "@mui/material/Box";
+import "./styles/global.css";
+import "shared/fonts/VAG-World/VAG-World.css";
 
 const App: FC = () => (
     <ReduxProvider>

@@ -1,21 +1,20 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { ILevelState, RootState } from "shared/types";
 
-import { ILevelState } from "./types";
-
-const selectBase = createSelector(
-    (state: ILevelState) => state,
-    (state) => state
+export const selectBase = createSelector(
+    (state: RootState) => state,
+    (state) => state.level
 );
 
-export const selectCategoryPreviewBooks = createSelector(
+export const levelSelector = createSelector(
     selectBase,
     (state: ILevelState) => state.level
 );
-export const selectCategoryPreviewLoading = createSelector(
+export const levelLoadingSelector = createSelector(
     selectBase,
     (state: ILevelState) => state.loading
 );
-export const selectCategoryPreviewError = createSelector(
+export const levelErrorSelector = createSelector(
     selectBase,
     (state: ILevelState) => state.error
 );
