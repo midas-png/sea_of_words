@@ -3,7 +3,15 @@ import { ILevel } from "shared/types";
 import { ILevelState, TAvaliableLevels } from "shared/types/levelTypes";
 import { level_1, level_2, level_3 } from "shared/mocks";
 
-const levels = [level_1, level_2, level_3];
+const levels: ILevel[] = [level_1, level_2, level_3];
+
+const sortWordsByLength = (words: string[]): string[] => {
+  return words.sort((a, b) => a.length - b.length);
+};
+
+levels.forEach((level: ILevel) => {
+  level.words = sortWordsByLength(level.words);
+});
 
 const initialState: ILevelState = {
     levelNumber: 1,

@@ -1,7 +1,7 @@
 import { RejectedDataType } from "./errorTypes";
 
 export interface ILevel {
-    readonly words: string[];
+    words: string[];
 }
 
 export type TAvaliableLevels = 1 | 2 | 3;
