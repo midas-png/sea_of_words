@@ -8,7 +8,7 @@ const levels = [level_1, level_2, level_3];
 const initialState: ILevelState = {
     levelNumber: 1,
     levelSelected: 1,
-    level: null,
+    level: levels[0],
     loading: false,
     error: null,
 };

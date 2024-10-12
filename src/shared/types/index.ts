@@ -6,3 +6,4 @@ export {
     type TAvaliableLevels,
 } from "./levelTypes";
 export { type RootState, type AppDispatch } from "./rootStore";
+export { type TLetter } from './letterTypes';

@@ -26,6 +26,12 @@ export default defineConfig({
                 ),
             },
             {
+                find: "features",
+                replacement: fileURLToPath(
+                    new URL("./src/features", import.meta.url)
+                ),
+            },
+            {
                 find: "shared",
                 replacement: fileURLToPath(
                     new URL("./src/shared", import.meta.url)

@@ -1,0 +1,1 @@
+export { WordBlock } from "./WordBlock";
