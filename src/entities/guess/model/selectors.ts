@@ -11,3 +11,8 @@ export const currentGuessSelector = createSelector(
     selectBase,
     (state: IGuessState) => state.currentGuess
 );
+
+export const guessedWordsSelector = createSelector(
+    selectBase,
+    (state: IGuessState) => state.guessedWords
+);

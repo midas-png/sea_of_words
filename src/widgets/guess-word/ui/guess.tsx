@@ -6,11 +6,12 @@ import { selectBase } from "entities/level";
 import { WordBlock } from "features/word-block";
 import { LettersRoulette } from "features/letters-roulette";
 import { TLetter } from "shared/types";
-import { currentGuessSelector } from "entities/guess";
+import { currentGuessSelector, guessedWordsSelector } from "entities/guess";
 
 export const GuessWord = () => {
     const levelStore = useAppSelector(selectBase);
     const currentGuessStore = useAppSelector(currentGuessSelector);
+    const guessedWordsStore = useAppSelector(guessedWordsSelector);
     const letters = getLettersFromWords(levelStore.level?.words || []);
 
     return (
@@ -20,11 +21,11 @@ export const GuessWord = () => {
             </Typography>
             <Stack alignItems="center" gap="19px">
                 <Stack alignItems="center" gap="6px">
-                    {levelStore.level?.words.map((word) => (
+                    {levelStore.level?.words.map((word, index) => (
                         <WordBlock
                             key={Math.random() + word}
                             word={word.split("") as TLetter[]}
-                            isGuessed
+                            isGuessed={guessedWordsStore.includes(index)}
                         />
                     ))}
                 </Stack>
