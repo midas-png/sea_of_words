@@ -37,7 +37,7 @@ export const GuessWord = () => {
                 <WordBlock word={["р", "о", "в"]} isSmalled isGuessed={false} />
             </Stack>
             <Box>
-                <LettersRoulette letters={["р", "о", "в", "ц"]} />
+                <LettersRoulette letters={["р", "о", "в"]} />
             </Box>
         </Stack>
     );

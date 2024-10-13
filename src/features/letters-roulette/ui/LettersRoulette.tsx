@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { TLetter } from "shared/types";
-import { ICoordinate } from "../lib";
+import { ICoordinate, positionsByLength } from "../lib";
 
 interface ILetterRoulette {
     letters: TLetter[];
@@ -22,26 +22,14 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
 
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const positions = [
-        { top: "10%", left: "50%", transform: "translate(-50%, -50%)" },
-        { top: "50%", right: "10%", transform: "translate(50%, -50%)" },
-        { bottom: "10%", left: "50%", transform: "translate(-50%, 50%)" },
-        { top: "50%", left: "10%", transform: "translate(-50%, -50%)" },
-        { top: "0%", left: "0%", transform: "translate(0%, 0%)" },
-    ];
+    const positions = positionsByLength[letters.length as 4 | 5];
 
-    const handleMouseDown = (
-        letter: TLetter,
-        position: { x: number; y: number }
-    ) => {
+    const handleMouseDown = (letter: TLetter, position: ICoordinate) => {
         setIsDragging(true);
         addLetterToSelection(letter, position);
     };
 
-    const handleMouseEnter = (
-        letter: TLetter,
-        position: { x: number; y: number }
-    ) => {
+    const handleMouseEnter = (letter: TLetter, position: ICoordinate) => {
         if (isDragging) {
             addLetterToSelection(letter, position);
         }
@@ -63,10 +51,7 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
         }
     };
 
-    const addLetterToSelection = (
-        letter: TLetter,
-        position: { x: number; y: number }
-    ) => {
+    const addLetterToSelection = (letter: TLetter, position: ICoordinate) => {
         if (!selectedLetters.includes(letter)) {
             setSelectedLetters([...selectedLetters, letter]);
             setSelectedPositions([...selectedPositions, position]);
@@ -131,16 +116,10 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
                             cursor: "pointer",
                         }}
                         onMouseDown={(e) =>
-                            handleMouseDown(
-                                letter,
-                                getRelativePosition(e)
-                            )
+                            handleMouseDown(letter, getRelativePosition(e))
                         }
                         onMouseEnter={(e) =>
-                            handleMouseEnter(
-                                letter,
-                                getRelativePosition(e)
-                            )
+                            handleMouseEnter(letter, getRelativePosition(e))
                         }
                     >
                         <Typography
@@ -168,7 +147,7 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
                     width: "100%",
                     height: "100%",
                     pointerEvents: "none",
-                    zIndex: 2, 
+                    zIndex: 2,
                 }}
             >
                 {/* Динамическая линия, следующая за мышью */}
