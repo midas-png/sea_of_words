@@ -30,7 +30,6 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
     const containerRef = useRef<HTMLDivElement>(null);
 
     const positions = positionsByLength[letters.length as 3 | 4 | 5 | 6];
-    console.log(letters);
 
     const handleMouseDown = (letter: TLetter, position: ICoordinate) => {
         setIsDragging(true);
@@ -70,7 +69,11 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
     };
 
     const addLetterToSelection = (letter: TLetter, position: ICoordinate) => {
-        if (selectedLetters.length === letters.length) return;
+        if (
+            selectedLetters.length === letters.length ||
+            selectedLetters[selectedLetters.length - 1] === letter
+        )
+            return;
 
         setSelectedLetters([...selectedLetters, letter]);
         setSelectedPositions([...selectedPositions, position]);
