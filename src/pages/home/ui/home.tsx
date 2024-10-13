@@ -7,17 +7,17 @@ import { typeSelector } from "entities/screen";
 
 export const HomePage: FC = () => {
     const screenStoreType = useAppSelector(typeSelector);
-    const isMultipleTabs = useIsMultipleTabs();
+    const { isMultipleTabs, isCurrentTabActive } = useIsMultipleTabs();
 
     return (
         <>
             {screenStoreType === "guess" ? <GuessWord /> : <VictoryScreen />}
             <Modal
-                open={isMultipleTabs}
+                open={isMultipleTabs && !isCurrentTabActive} // Показываем модалку только если вкладка не активна
                 title="Две вкладки с игрой?"
                 content="Похоже, игра открыта в нескольких вкладках браузера. Чтобы продолжить играть в этой вкладке, обновите страницу."
                 buttonText={"Обновить"}
-                onAccept={() => window.location.reload()}
+                onAccept={() => window.location.reload()} // Перезагрузка страницы при нажатии
             />
         </>
     );

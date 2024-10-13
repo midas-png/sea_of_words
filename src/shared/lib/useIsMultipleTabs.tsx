@@ -1,54 +1,51 @@
 import { useEffect, useState } from "react";
 
-export const useIsMultipleTabs = (): boolean => {
+export const useIsMultipleTabs = () => {
     const [isMultipleTabs, setIsMultipleTabs] = useState<boolean>(false);
+    const [isCurrentTabActive, setIsCurrentTabActive] = useState<boolean>(true);
 
     useEffect(() => {
-        const tabId = Date.now().toString(); // Уникальный идентификатор вкладки
+        const tabId = Date.now().toString(); // id вкладки
+        const storageKey = "openTabs";
 
         const updateTabs = (action: "add" | "remove") => {
-            const tabs = localStorage.getItem("openTabs")
-                ? JSON.parse(localStorage.getItem("openTabs") as string)
-                : [];
+            const tabs = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
             if (action === "add") {
-                tabs.push(tabId); // Добавляем текущую вкладку
+                tabs.push(tabId);
             } else {
                 const index = tabs.indexOf(tabId);
                 if (index !== -1) {
-                    tabs.splice(index, 1); // Удаляем текущую вкладку
+                    tabs.splice(index, 1);
                 }
             }
 
-            localStorage.setItem("openTabs", JSON.stringify(tabs));
+            localStorage.setItem(storageKey, JSON.stringify(tabs));
         };
 
-        // Добавляем текущую вкладку в список при загрузке
+        const checkTabs = () => {
+            const tabs = JSON.parse(localStorage.getItem(storageKey) || "[]");
+            // Если есть другие вкладки, но текущая активна — не показываем модальное окно
+            const isCurrentTabStillActive = tabs[tabs.length - 1] === tabId;
+            setIsCurrentTabActive(isCurrentTabStillActive);
+            setIsMultipleTabs(tabs.length > 1);
+        };
+
         updateTabs("add");
 
-        // Проверяем количество открытых вкладок
-        const checkTabs = () => {
-            const tabs = localStorage.getItem("openTabs")
-                ? JSON.parse(localStorage.getItem("openTabs") as string)
-                : [];
-            setIsMultipleTabs(tabs.length > 1); // Если вкладок больше одной, то устанавливаем true
-        };
-
-        // Обрабатываем изменения в localStorage
         const handleStorage = (event: StorageEvent) => {
-            if (event.key === "openTabs") {
-                checkTabs(); // Проверяем количество вкладок
+            if (event.key === storageKey) {
+                checkTabs();
             }
         };
 
         window.addEventListener("storage", handleStorage);
-        window.addEventListener("beforeunload", () => updateTabs("remove")); // Удаляем вкладку при закрытии
+        window.addEventListener("beforeunload", () => updateTabs("remove"));
 
-        // Проверяем состояние при первой загрузке
         checkTabs();
 
         return () => {
-            updateTabs("remove"); // Удаляем вкладку при размонтировании компонента
+            updateTabs("remove");
             window.removeEventListener("storage", handleStorage);
             window.removeEventListener("beforeunload", () =>
                 updateTabs("remove")
@@ -56,5 +53,5 @@ export const useIsMultipleTabs = (): boolean => {
         };
     }, []);
 
-    return isMultipleTabs;
+    return { isMultipleTabs, isCurrentTabActive };
 };
