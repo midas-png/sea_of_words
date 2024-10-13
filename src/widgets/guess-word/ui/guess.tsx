@@ -1,23 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { useAppDispatch, useAppSelector } from "shared/lib";
+import { getLettersFromWords, useAppSelector } from "shared/lib";
 import { selectBase } from "entities/level";
 import { WordBlock } from "features/word-block";
 import { TLetter } from "shared/types";
 import Box from "@mui/material/Box";
-import { Button } from "shared/ui";
-import { useCallback } from "react";
-import { screenSlice } from "entities/screen";
 import { LettersRoulette } from "features/letters-roulette";
 
 export const GuessWord = () => {
     const levelStore = useAppSelector(selectBase);
-    const dispatch = useAppDispatch();
-
-    const handleNextLevel = useCallback(() => {
-        dispatch(screenSlice.actions.setScreen("next"));
-    }, []);
+    const letters = getLettersFromWords(levelStore.level?.words || []);
 
     return (
         <Stack alignItems="center" py={4} height={1} gap="57px">
@@ -37,7 +29,7 @@ export const GuessWord = () => {
                 <WordBlock word={["р", "о", "в"]} isSmalled isGuessed={false} />
             </Stack>
             <Box>
-                <LettersRoulette letters={["р", "о", "в"]} />
+                <LettersRoulette letters={letters} />
             </Box>
         </Stack>
     );
