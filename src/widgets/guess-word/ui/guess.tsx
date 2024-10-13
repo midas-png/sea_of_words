@@ -1,14 +1,16 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { getLettersFromWords, useAppSelector } from "shared/lib";
 import { selectBase } from "entities/level";
 import { WordBlock } from "features/word-block";
-import { TLetter } from "shared/types";
-import Box from "@mui/material/Box";
 import { LettersRoulette } from "features/letters-roulette";
+import { TLetter } from "shared/types";
+import { currentGuessSelector } from "entities/guess";
 
 export const GuessWord = () => {
     const levelStore = useAppSelector(selectBase);
+    const currentGuessStore = useAppSelector(currentGuessSelector);
     const letters = getLettersFromWords(levelStore.level?.words || []);
 
     return (
@@ -26,7 +28,11 @@ export const GuessWord = () => {
                         />
                     ))}
                 </Stack>
-                <WordBlock word={["р", "о", "в"]} isSmalled isGuessed={false} />
+                <WordBlock
+                    word={currentGuessStore}
+                    isSmalled
+                    isGuessed={false}
+                />
             </Stack>
             <Box>
                 <LettersRoulette letters={letters} />

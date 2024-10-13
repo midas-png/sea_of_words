@@ -8,11 +8,13 @@ import {
 } from "@reduxjs/toolkit";
 import { ILevelState } from "./levelTypes";
 import { IScreenState } from "./screenTypes";
+import { IGuessState } from "./guessTypes";
 
 export type RootStore = EnhancedStore<
     {
         level: ILevelState;
         screen: IScreenState;
+        guess: IGuessState;
     },
     UnknownAction,
     Tuple<
@@ -22,6 +24,7 @@ export type RootStore = EnhancedStore<
                     {
                         level: ILevelState;
                         screen: IScreenState;
+                        guess: IGuessState;
                     },
                     undefined,
                     UnknownAction
@@ -37,11 +40,13 @@ export type RootState = ReturnType<
         {
             level: ILevelState;
             screen: IScreenState;
+            guess: IGuessState;
         },
         UnknownAction,
         Partial<{
             level: ILevelState | undefined;
             screen: IScreenState | undefined;
+            guess: IGuessState | undefined;
         }>
     >
 >;

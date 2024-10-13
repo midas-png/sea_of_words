@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { TLetter } from "shared/types";
 import { ICoordinate, positionsByLength } from "../lib";
+import { useAppDispatch } from "shared/lib";
+import { guessSlice } from "entities/guess";
 
 interface ILetterRoulette {
     letters: TLetter[];
@@ -12,6 +14,7 @@ interface ILetterRoulette {
 export const LettersRoulette: FC<ILetterRoulette> = ({
     letters,
 }: ILetterRoulette) => {
+    const dispatch = useAppDispatch();
     const [selectedLetters, setSelectedLetters] = useState<TLetter[]>([]);
     const [selectedPositions, setSelectedPositions] = useState<ICoordinate[]>(
         []
@@ -27,11 +30,13 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
     const handleMouseDown = (letter: TLetter, position: ICoordinate) => {
         setIsDragging(true);
         addLetterToSelection(letter, position);
+        dispatch(guessSlice.actions.addCurrentGuess(letter));
     };
 
     const handleMouseEnter = (letter: TLetter, position: ICoordinate) => {
         if (isDragging) {
             addLetterToSelection(letter, position);
+            dispatch(guessSlice.actions.addCurrentGuess(letter));
         }
     };
 
@@ -40,6 +45,7 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
         setSelectedLetters([]);
         setSelectedPositions([]);
         setCurrentMousePosition(null);
+        dispatch(guessSlice.actions.setCurrentGuess([]));
     };
 
     const handleMouseMove = (event: React.MouseEvent) => {
