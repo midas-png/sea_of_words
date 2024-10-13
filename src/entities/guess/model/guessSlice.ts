@@ -15,10 +15,17 @@ export const guessSlice = createSlice({
             state.currentGuess = action.payload;
         },
         addCurrentGuess(state, action: PayloadAction<TLetter>) {
-            if (state.currentGuess.includes(action.payload)) return;
-
             state.currentGuess = [...state.currentGuess, action.payload];
         },
+        addGuessedWord(state, action: PayloadAction<number>) {
+            if (state.guessedWords.includes(action.payload)) return;
+
+            state.guessedWords = [...state.guessedWords, action.payload];
+        },
+        clear(state) {
+            state.currentGuess = [];
+            state.guessedWords = [];
+        }
     },
 });
 

@@ -15,29 +15,34 @@ export const GuessWord = () => {
     const letters = getLettersFromWords(levelStore.level?.words || []);
 
     return (
-        <Stack alignItems="center" py={4} height={1} gap="57px">
+        <Stack alignItems="center" py={4} height={1} gap="19px">
             <Typography color="#fff" fontSize={30} lineHeight="35px">
                 Уровень {levelStore.levelNumber}
             </Typography>
-            <Stack alignItems="center" gap="19px">
-                <Stack alignItems="center" gap="6px">
-                    {levelStore.level?.words.map((word, index) => (
-                        <WordBlock
-                            key={Math.random() + word}
-                            word={word.split("") as TLetter[]}
-                            isGuessed={guessedWordsStore.includes(index)}
-                        />
-                    ))}
-                </Stack>
-                <WordBlock
-                    word={currentGuessStore}
-                    isSmalled
-                    isGuessed={false}
-                />
+            <Stack alignItems="center" gap="6px">
+                {levelStore.level?.words.map((word, index) => (
+                    <WordBlock
+                        key={Math.random() + word}
+                        word={word.split("") as TLetter[]}
+                        isGuessed={guessedWordsStore.includes(index)}
+                    />
+                ))}
             </Stack>
-            <Box>
+            <Stack gap="38px">
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    height="42px"
+                >
+                    <WordBlock
+                        word={currentGuessStore}
+                        isSmalled
+                        isGuessed={false}
+                    />
+                </Box>
                 <LettersRoulette letters={letters} />
-            </Box>
+            </Stack>
         </Stack>
     );
 };

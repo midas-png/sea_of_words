@@ -4,8 +4,10 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { TLetter } from "shared/types";
 import { ICoordinate, positionsByLength } from "../lib";
-import { useAppDispatch } from "shared/lib";
-import { guessSlice } from "entities/guess";
+import { useAppDispatch, useAppSelector } from "shared/lib";
+import { guessedWordsSelector, guessSlice } from "entities/guess";
+import { levelSelector } from "entities/level";
+import { screenSlice } from "entities/screen";
 
 interface ILetterRoulette {
     letters: TLetter[];
@@ -15,6 +17,8 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
     letters,
 }: ILetterRoulette) => {
     const dispatch = useAppDispatch();
+    const levelStore = useAppSelector(levelSelector);
+    const guessedWordsStore = useAppSelector(guessedWordsSelector);
     const [selectedLetters, setSelectedLetters] = useState<TLetter[]>([]);
     const [selectedPositions, setSelectedPositions] = useState<ICoordinate[]>(
         []
@@ -25,22 +29,30 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
 
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const positions = positionsByLength[letters.length as 4 | 5];
+    const positions = positionsByLength[letters.length as 3 | 4 | 5 | 6];
+    console.log(letters);
 
     const handleMouseDown = (letter: TLetter, position: ICoordinate) => {
         setIsDragging(true);
         addLetterToSelection(letter, position);
-        dispatch(guessSlice.actions.addCurrentGuess(letter));
     };
 
     const handleMouseEnter = (letter: TLetter, position: ICoordinate) => {
         if (isDragging) {
             addLetterToSelection(letter, position);
-            dispatch(guessSlice.actions.addCurrentGuess(letter));
         }
     };
 
     const handleMouseUp = () => {
+        const guessedWord = selectedLetters.join("");
+        if (levelStore?.words.includes(guessedWord)) {
+            const guessedIndex = levelStore.words.indexOf(guessedWord);
+            dispatch(guessSlice.actions.addGuessedWord(guessedIndex));
+
+            if (guessedWordsStore.length + 1 === levelStore?.words.length) {
+                dispatch(screenSlice.actions.setScreen("next"));
+            }
+        }
         setIsDragging(false);
         setSelectedLetters([]);
         setSelectedPositions([]);
@@ -58,10 +70,11 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
     };
 
     const addLetterToSelection = (letter: TLetter, position: ICoordinate) => {
-        if (!selectedLetters.includes(letter)) {
-            setSelectedLetters([...selectedLetters, letter]);
-            setSelectedPositions([...selectedPositions, position]);
-        }
+        if (selectedLetters.length === letters.length) return;
+
+        setSelectedLetters([...selectedLetters, letter]);
+        setSelectedPositions([...selectedPositions, position]);
+        dispatch(guessSlice.actions.addCurrentGuess(letter));
     };
 
     const getRelativePosition = (event: React.MouseEvent) => {
