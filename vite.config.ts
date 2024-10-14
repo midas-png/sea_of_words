@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from "url";
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
+    base: '/sea_of_words/',
     resolve: {
         alias: [
             {
