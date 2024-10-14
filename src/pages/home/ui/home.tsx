@@ -13,11 +13,11 @@ export const HomePage: FC = () => {
         <>
             {screenStoreType === "guess" ? <GuessWord /> : <VictoryScreen />}
             <Modal
-                open={isMultipleTabs && !isCurrentTabActive} // Показываем модалку только если вкладка не активна
+                open={isMultipleTabs && !isCurrentTabActive}
                 title="Две вкладки с игрой?"
                 content="Похоже, игра открыта в нескольких вкладках браузера. Чтобы продолжить играть в этой вкладке, обновите страницу."
                 buttonText={"Обновить"}
-                onAccept={() => window.location.reload()} // Перезагрузка страницы при нажатии
+                onAccept={() => window.location.reload()}
             />
         </>
     );

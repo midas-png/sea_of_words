@@ -95,8 +95,8 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
             ref={containerRef}
             sx={{
                 position: "relative",
-                width: 357,
-                height: 357,
+                width: 200,
+                height: 200,
                 borderRadius: "50%",
                 margin: "0 auto",
                 display: "flex",
@@ -109,11 +109,11 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
             <Box
                 sx={{
                     position: "absolute",
-                    width: "300px",
-                    height: "300px",
+                    width: "100px",
+                    height: "100px",
                     borderRadius: "50%",
                     p: 9,
-                    border: "18px solid #34495E",
+                    border: "10px solid #34495E",
                 }}
             />
 
@@ -123,8 +123,8 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
                         key={index}
                         sx={{
                             position: "absolute",
-                            width: 80,
-                            height: 80,
+                            width: 40,
+                            height: 40,
                             borderRadius: "50%",
                             backgroundColor: selectedLetters.includes(letter)
                                 ? "#E96FA4"
@@ -133,7 +133,7 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
                             justifyContent: "center",
                             alignItems: "center",
                             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                            zIndex: 1, // Буквы будут ниже линии
+                            zIndex: 1,
                             ...positions[index],
                             cursor: "pointer",
                         }}
@@ -146,7 +146,7 @@ export const LettersRoulette: FC<ILetterRoulette> = ({
                     >
                         <Typography
                             variant="h5"
-                            fontSize={47}
+                            fontSize={37}
                             color={
                                 selectedLetters.includes(letter)
                                     ? "#fff"

@@ -22,7 +22,7 @@ export const positionsByLength = {
         { top: "30%", right: "15%", transform: "translate(50%, -50%)" },
         { top: "70%", right: "15%", transform: "translate(50%, -50%)" },
         { top: "90%", left: "50%", transform: "translate(-50%, -50%)" },
-        { top: "30%", left: "-10%", transform: "translate(50%, -50%)" },
-        { top: "70%", left: "-10%", transform: "translate(50%, -50%)" },
+        { top: "30%", left: "-3%", transform: "translate(50%, -50%)" },
+        { top: "70%", left: "-3%", transform: "translate(50%, -50%)" },
     ],
 };

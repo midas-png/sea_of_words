@@ -20,9 +20,9 @@ export const LetterBlock: FC<ILetterBlock> = ({
             justifyContent="center"
             alignItems="center"
             bgcolor={isGuessed ? "#65BD65" : "#F2F2F2"}
-            height={isSmalled ? 42 : 72}
-            width={isSmalled ? 42 : 72}
-            borderRadius="16px"
+            height={isSmalled ? 32 : 52}
+            width={isSmalled ? 32 : 52}
+            borderRadius={isSmalled ? '12px' : '16px' }
         >
             {(isGuessed || isSmalled) && (
                 <Typography

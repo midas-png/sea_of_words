@@ -12,9 +12,9 @@ const App: FC = () => (
                 display="flex"
                 justifyContent="center"
                 bgcolor="#202432"
-                minHeight="100vh"
+                height="100vh"
             >
-                <Box width={640} bgcolor="#2B344B" height={1}>
+                <Box width={440} bgcolor="#2B344B" height={1}>
                     <HomePage />
                 </Box>
             </Box>
