@@ -1,11 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
 import { fileURLToPath, URL } from "url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
-    base: '/sea_of_words/',
+    base: "/sea_of_words/",
+    build: {
+        outDir: "dist",
+    },
     resolve: {
         alias: [
             {
